@@ -1,4 +1,4 @@
-package me.chaws.packetlogger.mixin;
+package me.chaws.packetsniffer.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;

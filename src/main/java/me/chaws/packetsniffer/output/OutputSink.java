@@ -1,4 +1,4 @@
-package me.chaws.packetlogger.output;
+package me.chaws.packetsniffer.output;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

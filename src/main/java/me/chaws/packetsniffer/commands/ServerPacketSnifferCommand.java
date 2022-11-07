@@ -1,7 +1,7 @@
-package me.chaws.packetlogger.commands;
+package me.chaws.packetsniffer.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import me.chaws.packetlogger.config.PacketLoggerConfig;
+import me.chaws.packetsniffer.config.PacketSnifferConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.server.command.ServerCommandSource;
@@ -13,9 +13,9 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 @Environment(EnvType.SERVER)
-public class ServerPacketLoggerCommand {
+public class ServerPacketSnifferCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-		var command = literal("serverpacketlogger")
+		var command = literal("serverpacketsniffer")
 			.then(literal("toggle")
 				.executes(ctx -> toggle(ctx.getSource()))
 			).then(literal("list")
@@ -29,32 +29,32 @@ public class ServerPacketLoggerCommand {
 			);
 
 		dispatcher.register(command);
-		dispatcher.register(literal("spl").executes(command.getCommand()));
+		dispatcher.register(literal("sps").executes(command.getCommand()));
 	}
 
 	private static int toggle(ServerCommandSource source) {
-		PacketLoggerConfig.enabled = !PacketLoggerConfig.enabled;
+		PacketSnifferConfig.enabled = !PacketSnifferConfig.enabled;
 
-		if (PacketLoggerConfig.enabled) {
-			source.sendFeedback(Text.literal("Packet logging enabled"), false);
+		if (PacketSnifferConfig.enabled) {
+			source.sendFeedback(Text.literal("Packet sniffing enabled"), false);
 		} else {
-			source.sendFeedback(Text.literal("Packet logging disabled"), false);
+			source.sendFeedback(Text.literal("Packet sniffing disabled"), false);
 		}
 
 		return 0;
 	}
 
 	private static int list(ServerCommandSource source) {
-		source.sendFeedback(Text.literal("Registered Logger Filters:"), false);
+		source.sendFeedback(Text.literal("Registered Filters:"), false);
 
 		return 0;
 	}
 
 	private static int include(ServerCommandSource source, String string) {
-		if (PacketLoggerConfig.inclusions.contains(string)) {
+		if (PacketSnifferConfig.inclusions.contains(string)) {
 			source.sendFeedback(Text.literal("Packet inclusion has already been added"), false);
 		} else {
-			PacketLoggerConfig.inclusions.add(string);
+			PacketSnifferConfig.inclusions.add(string);
 			source.sendFeedback(Text.literal("Packet inclusion added"), false);
 		}
 
@@ -62,10 +62,10 @@ public class ServerPacketLoggerCommand {
 	}
 
 	private static int exclude(ServerCommandSource source, String string) {
-		if (PacketLoggerConfig.exclusions.contains(string)) {
+		if (PacketSnifferConfig.exclusions.contains(string)) {
 			source.sendFeedback(Text.literal("Packet exclusion has already been added"), false);
 		} else {
-			PacketLoggerConfig.exclusions.add(string);
+			PacketSnifferConfig.exclusions.add(string);
 			source.sendFeedback(Text.literal("Packet exclusion added"), false);
 		}
 
@@ -73,8 +73,8 @@ public class ServerPacketLoggerCommand {
 	}
 
 	private static int clear(ServerCommandSource source) {
-		PacketLoggerConfig.inclusions.clear();
-		PacketLoggerConfig.exclusions.clear();
+		PacketSnifferConfig.inclusions.clear();
+		PacketSnifferConfig.exclusions.clear();
 		source.sendFeedback(Text.literal("Packet inclusions and exclusions cleared"), false);
 
 		return 0;

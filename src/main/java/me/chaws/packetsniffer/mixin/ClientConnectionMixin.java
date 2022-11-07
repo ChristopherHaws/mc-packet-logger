@@ -1,7 +1,7 @@
-package me.chaws.packetlogger.mixin;
+package me.chaws.packetsniffer.mixin;
 
-import me.chaws.packetlogger.config.PacketLoggerConfig;
-import me.chaws.packetlogger.utils.PacketCounter;
+import me.chaws.packetsniffer.config.PacketSnifferConfig;
+import me.chaws.packetsniffer.utils.PacketCounter;
 import net.minecraft.network.*;
 import net.minecraft.network.listener.PacketListener;
 import net.minecraft.util.Identifier;
@@ -24,7 +24,7 @@ public class ClientConnectionMixin {
 
 	@Inject(method = "sendImmediately", at = @At("HEAD"))
 	private void logSentPacket(Packet<?> packet, @Nullable PacketCallbacks callbacks, CallbackInfo ci) {
-		if (!PacketLoggerConfig.enabled) {
+		if (!PacketSnifferConfig.enabled) {
 			return;
 		}
 
@@ -35,7 +35,7 @@ public class ClientConnectionMixin {
 
 	@Inject(method = "handlePacket", at = @At("HEAD"))
 	private static void logReceivedPacket(Packet<?> packet, PacketListener listener, CallbackInfo ci) {
-		if (!PacketLoggerConfig.enabled) {
+		if (!PacketSnifferConfig.enabled) {
 			return;
 		}
 
@@ -49,11 +49,11 @@ public class ClientConnectionMixin {
 		var channel = getChannel(packet);
 		var packetName = StringUtils.removeStart(packet.getClass().getName(), "net.minecraft.network.packet.");
 
-		if (PacketLoggerConfig.inclusions.stream().noneMatch(packetName::contains)){
+		if (PacketSnifferConfig.inclusions.stream().noneMatch(packetName::contains)){
 			return;
 		}
 
-		if (PacketLoggerConfig.exclusions.stream().anyMatch(packetName::contains)){
+		if (PacketSnifferConfig.exclusions.stream().anyMatch(packetName::contains)){
 			return;
 		}
 

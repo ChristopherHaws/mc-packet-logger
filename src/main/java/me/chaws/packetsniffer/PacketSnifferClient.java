@@ -1,7 +1,7 @@
-package me.chaws.packetlogger;
+package me.chaws.packetsniffer;
 
-import me.chaws.packetlogger.commands.ClientPacketLoggerCommand;
-import me.chaws.packetlogger.utils.PacketCounter;
+import me.chaws.packetsniffer.commands.ClientPacketSnifferCommand;
+import me.chaws.packetsniffer.utils.PacketCounter;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,16 +10,16 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.world.ClientWorld;
 
 @Environment(EnvType.CLIENT)
-public class PacketLoggerClient implements ClientModInitializer {
+public class PacketSnifferClient implements ClientModInitializer {
 	private static int ticksSinceLastBroadcast = 0;
 
 	@Override
 	public void onInitializeClient() {
 		ClientCommandRegistrationCallback.EVENT.register(((dispatcher, registryAccess) -> {
-			ClientPacketLoggerCommand.register(dispatcher);
+			ClientPacketSnifferCommand.register(dispatcher);
 		}));
 
-		ClientTickEvents.END_WORLD_TICK.register(PacketLoggerClient::onEndTick);
+		ClientTickEvents.END_WORLD_TICK.register(PacketSnifferClient::onEndTick);
 	}
 
 	private static void onEndTick(ClientWorld world) {

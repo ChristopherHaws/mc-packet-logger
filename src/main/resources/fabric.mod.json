@@ -1,34 +1,34 @@
 {
 	"schemaVersion": 1,
-	"id": "packetlogger",
+	"id": "packetsniffer",
 	"version": "${version}",
-	"name": "Packet Logger",
+	"name": "Packet Sniffer",
 	"description": "Logs sent and received packets for both the client and server.",
 	"authors": [
 		"chaws",
 		"haykam821"
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/packet-logger",
-		"sources": "https://github.com/christopherhaws/mc-packet-logger",
-		"issues": "https://github.com/christopherhaws/mc-packet-logger/issues"
+		"homepage": "https://modrinth.com/mod/packet-sniffer",
+		"sources": "https://github.com/christopherhaws/mc-packet-sniffer",
+		"issues": "https://github.com/christopherhaws/mc-packet-sniffer/issues"
 	},
 	"entrypoints": {
 		"main": [
-			"me.chaws.packetlogger.PacketLogger"
+			"me.chaws.packetsniffer.PacketSniffer"
 		],
 		"server": [
-			"me.chaws.packetlogger.PacketLoggerServer"
+			"me.chaws.packetsniffer.PacketSnifferServer"
 		],
 		"client": [
-			"me.chaws.packetlogger.PacketLoggerClient"
+			"me.chaws.packetsniffer.PacketSnifferClient"
 		]
 	},
 	"mixins": [
-		"packetlogger.mixins.json"
+		"packetsniffer.mixins.json"
 	],
 	"license": "MIT",
-	"icon": "assets/packetlogger/icon.png",
+	"icon": "assets/packetsniffer/icon.png",
 	"depends": {
 		"fabricloader": ">=0.14",
 		"fabric": "*",
@@ -43,6 +43,14 @@
 			"links": {
 				"modmenu.discord": "https://discord.gg/kQjty3rfJd"
 			}
+		},
+		"modmanager": {
+			"modrinth": "PrkNLbxc"
+		},
+		"modupdater": {
+			"strategy": "github",
+			"owner": "ChristopherHaws",
+			"repository": "mc-packet-sniffer"
 		}
 	}
 }

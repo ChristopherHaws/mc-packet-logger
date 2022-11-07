@@ -1,9 +1,9 @@
-package me.chaws.packetlogger.config;
+package me.chaws.packetsniffer.config;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class PacketLoggerConfig {
+public class PacketSnifferConfig {
 	public static boolean enabled = false;
 	public static List<String> inclusions = new LinkedList<>(List.of(
 		"c2s",
