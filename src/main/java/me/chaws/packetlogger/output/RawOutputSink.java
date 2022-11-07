@@ -3,6 +3,8 @@ package me.chaws.packetlogger.output;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class RawOutputSink implements OutputSink {
@@ -10,7 +12,9 @@ public class RawOutputSink implements OutputSink {
 
 	@Override
 	public void appendLine(final @NotNull String line) {
-		lines.add(line);
+		var timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+		var time = LocalDateTime.now();
+		lines.add(time.format(timeFormat) + " " + line);
 	}
 
 	@Override
