@@ -5,18 +5,19 @@
 	"name": "Packet Logger",
 	"description": "Logs sent and received packets for both the client and server.",
 	"authors": [
+		"chaws",
 		"haykam821"
 	],
 	"contact": {
-		"homepage": "https://github.com/haykam821/Packet-Logger#readme",
-		"issues": "https://github.com/haykam821/Packet-Logger/issues"
+		"homepage": "https://github.com/christopherhaws/mc-packet-logger",
+		"issues": "https://github.com/christopherhaws/mc-packet-logger/issues"
 	},
 	"mixins": [
-		"packetlogger.mixin.json"
+		"packetlogger.mixins.json"
 	],
 	"license": "MIT",
 	"icon": "assets/packetlogger/icon.png",
 	"depends": {
-		"fabricloader": ">=0.4.0"
+		"fabricloader": ">=0.14.0"
 	}
 }
