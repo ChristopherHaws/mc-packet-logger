@@ -9,8 +9,20 @@
 		"haykam821"
 	],
 	"contact": {
-		"homepage": "https://github.com/christopherhaws/mc-packet-logger",
+		"homepage": "https://modrinth.com/mod/packet-logger",
+		"sources": "https://github.com/christopherhaws/mc-packet-logger",
 		"issues": "https://github.com/christopherhaws/mc-packet-logger/issues"
+	},
+	"entrypoints": {
+		"main": [
+			"me.chaws.packetlogger.PacketLogger"
+		],
+		"server": [
+			"me.chaws.packetlogger.PacketLoggerServer"
+		],
+		"client": [
+			"me.chaws.packetlogger.PacketLoggerClient"
+		]
 	},
 	"mixins": [
 		"packetlogger.mixins.json"
@@ -18,6 +30,19 @@
 	"license": "MIT",
 	"icon": "assets/packetlogger/icon.png",
 	"depends": {
-		"fabricloader": ">=0.14.0"
+		"fabricloader": ">=0.14",
+		"fabric": "*",
+		"minecraft": "~1.19",
+		"java": ">=17"
+	},
+	"suggests": {
+		"modmenu": ">=4"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/kQjty3rfJd"
+			}
+		}
 	}
 }

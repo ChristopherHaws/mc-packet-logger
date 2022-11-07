@@ -3,7 +3,7 @@ package me.chaws.packetlogger.utils;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("unused")
-class StringUtils {
+public class StringUtils {
 	public static @NotNull String fromBytes(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[ ");

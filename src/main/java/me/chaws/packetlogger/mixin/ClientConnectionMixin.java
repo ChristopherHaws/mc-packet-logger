@@ -1,8 +1,11 @@
 package me.chaws.packetlogger.mixin;
 
+import me.chaws.packetlogger.config.PacketLoggerConfig;
+import me.chaws.packetlogger.utils.PacketCounter;
 import net.minecraft.network.*;
 import net.minecraft.network.listener.PacketListener;
 import net.minecraft.util.Identifier;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Locale;
 
-import static me.chaws.packetlogger.PacketLogger.sendMessage;
-
 @Mixin(ClientConnection.class)
 public class ClientConnectionMixin {
 	@Shadow
@@ -23,36 +24,51 @@ public class ClientConnectionMixin {
 
 	@Inject(method = "sendImmediately", at = @At("HEAD"))
 	private void logSentPacket(Packet<?> packet, @Nullable PacketCallbacks callbacks, CallbackInfo ci) {
-		var sideName = getSideName(side);
-		var channel = getChannel(packet);
-		var packetName = packet.getClass().getName();
-
-		if (channel != null) {
-			sendMessage(sideName + " sent - " + channel + " - " + packetName);
-		} else {
-			sendMessage(sideName + " sent - " + packetName);
+		if (!PacketLoggerConfig.enabled) {
+			return;
 		}
+
+		var sideName = getSideName(side);
+
+		logPacket(sideName + "->", packet);
 	}
 
 	@Inject(method = "handlePacket", at = @At("HEAD"))
 	private static void logReceivedPacket(Packet<?> packet, PacketListener listener, CallbackInfo ci) {
+		if (!PacketLoggerConfig.enabled) {
+			return;
+		}
+
 		var side = ((ClientConnectionAccessor)listener.getConnection()).getSide();
 		var sideName = getSideName(side);
+
+		logPacket("->" + sideName, packet);
+	}
+
+	private static void logPacket(String direction, Packet<?> packet) {
 		var channel = getChannel(packet);
-		var packetName = packet.getClass().getName();
+		var packetName = StringUtils.removeStart(packet.getClass().getName(), "net.minecraft.network.packet.");
+
+		if (PacketLoggerConfig.inclusions.stream().noneMatch(packetName::contains)){
+			return;
+		}
+
+		if (PacketLoggerConfig.exclusions.stream().anyMatch(packetName::contains)){
+			return;
+		}
 
 		if (channel != null) {
-			sendMessage(sideName + " received - " + channel + " - " + packetName);
+			PacketCounter.add(direction + " " + channel + " " + packetName);
 		} else {
-			sendMessage(sideName + " received - " + packetName);
+			PacketCounter.add(direction + " " + packetName);
 		}
 	}
 
 	private static String getSideName(NetworkSide side) {
-		if (side == NetworkSide.CLIENTBOUND) return "server";
-		if (side == NetworkSide.SERVERBOUND) return "client";
+		if (side == NetworkSide.CLIENTBOUND) return "s";
+		if (side == NetworkSide.SERVERBOUND) return "c";
 
-		return side.name().toLowerCase(Locale.ROOT);
+		return String.valueOf(side.name().toLowerCase(Locale.ROOT).charAt(0));
 	}
 
 	@Nullable
