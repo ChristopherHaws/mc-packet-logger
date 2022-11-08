@@ -15,13 +15,13 @@
 	},
 	"entrypoints": {
 		"main": [
-			"me.chaws.packetsniffer.PacketSniffer"
+			"io.chaws.packetsniffer.PacketSniffer"
 		],
 		"server": [
-			"me.chaws.packetsniffer.PacketSnifferServer"
+			"io.chaws.packetsniffer.PacketSnifferServer"
 		],
 		"client": [
-			"me.chaws.packetsniffer.PacketSnifferClient"
+			"io.chaws.packetsniffer.PacketSnifferClient"
 		]
 	},
 	"mixins": [

@@ -1,7 +1,7 @@
-package me.chaws.packetsniffer.mixin;
+package io.chaws.packetsniffer.mixin;
 
-import me.chaws.packetsniffer.config.PacketSnifferConfig;
-import me.chaws.packetsniffer.utils.PacketCounter;
+import io.chaws.packetsniffer.config.PacketSnifferConfig;
+import io.chaws.packetsniffer.utils.PacketCounter;
 import net.minecraft.network.*;
 import net.minecraft.network.listener.PacketListener;
 import net.minecraft.util.Identifier;

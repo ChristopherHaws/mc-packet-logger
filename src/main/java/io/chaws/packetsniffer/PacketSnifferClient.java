@@ -1,7 +1,7 @@
-package me.chaws.packetsniffer;
+package io.chaws.packetsniffer;
 
-import me.chaws.packetsniffer.commands.ClientPacketSnifferCommand;
-import me.chaws.packetsniffer.utils.PacketCounter;
+import io.chaws.packetsniffer.commands.ClientPacketSnifferCommand;
+import io.chaws.packetsniffer.utils.PacketCounter;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

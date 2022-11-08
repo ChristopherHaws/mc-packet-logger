@@ -1,7 +1,7 @@
-package me.chaws.packetsniffer.utils;
+package io.chaws.packetsniffer.utils;
 
-import me.chaws.packetsniffer.output.OutputSink;
-import me.chaws.packetsniffer.output.RawOutputSink;
+import io.chaws.packetsniffer.output.OutputSink;
+import io.chaws.packetsniffer.output.RawOutputSink;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 

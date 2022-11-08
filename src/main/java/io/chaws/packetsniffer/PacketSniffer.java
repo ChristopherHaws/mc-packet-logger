@@ -1,4 +1,4 @@
-package me.chaws.packetsniffer;
+package io.chaws.packetsniffer;
 
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;

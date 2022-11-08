@@ -1,7 +1,7 @@
-package me.chaws.packetsniffer.commands;
+package io.chaws.packetsniffer.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import me.chaws.packetsniffer.config.PacketSnifferConfig;
+import io.chaws.packetsniffer.config.PacketSnifferConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.server.command.ServerCommandSource;

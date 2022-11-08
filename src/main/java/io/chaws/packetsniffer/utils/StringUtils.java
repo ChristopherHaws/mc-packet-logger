@@ -1,4 +1,4 @@
-package me.chaws.packetsniffer.utils;
+package io.chaws.packetsniffer.utils;
 
 import org.jetbrains.annotations.NotNull;
 

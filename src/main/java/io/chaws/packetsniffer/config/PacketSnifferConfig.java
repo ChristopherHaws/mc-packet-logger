@@ -1,4 +1,4 @@
-package me.chaws.packetsniffer.config;
+package io.chaws.packetsniffer.config;
 
 import java.util.LinkedList;
 import java.util.List;
